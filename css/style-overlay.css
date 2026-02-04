@@ -1,0 +1,3 @@
+#notebook-overlay, #museum-overlay, #timer-overlay, #map, #close-timer {
+    display: none !important;
+}

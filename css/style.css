@@ -1,0 +1,262 @@
+@font-face {
+    font-family: 'Lemon Milk'; 
+    src: url('../assets/fonts/lemon-milk/LEMONMILK-Regular.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lemon Milk';
+    src: url('../assets/fonts/lemon-milk/LEMONMILK-Bold.otf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lemon Milk';
+    src: url('../assets/fonts/lemon-milk/LEMONMILK-RegularItalic.otf');
+    font-weight: normal;
+    font-style: italic;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    --night-bordeaux: #590d22ff;
+    --dark-amaranth: #800f2fff;
+    --cherry-rose: #a4133cff;
+    --rosewood: #c9184aff;
+    --bubblegum-pink: #ff4d6dff;
+    --bubblegum-pink-2: #ff758fff;
+    --cotton-candy: #ff8fa3ff;
+    --cherry-blossom: #ffb3c1ff;
+    --pastel-pink: #ffccd5ff;
+    --lavender-blush: #fff0f3ff;
+    padding: 0;
+    margin: 0;
+}
+
+#page-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    flex-grow: 1;
+    background-color: lavenderblush;
+    padding-left: 0;
+    padding-right: 0;
+
+    width: 100%;
+    min-height: 100vh;
+
+    background-image: url('../assets/img/love-background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Header */
+.header-wrapper{
+    background-color: var(--lavender-blush);
+    padding-left: 15px;
+    padding-top: 0%;
+    
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Lemon Milk Medium', sans-serif;
+    font-size: 15px;
+    color: var(--night-bordeaux);
+}
+
+#dcf-logo {
+    width: 4%;
+    height: auto;
+    background-color: var(--night-bordeaux);
+    border-radius: 15px;
+}
+
+#header-logo-title {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 175px;
+    font-size: 12px;
+    line-height: 1;
+}
+
+#line {
+    font-size: 25px;
+    font-weight: 300;
+}
+
+#header-logo-title p {
+    padding: 0;
+    margin: 0;
+}
+
+#header-bar{
+    display: flex;
+    flex-grow: 1;
+
+    height: 30px;
+    margin-left: 20px;
+    margin-right: 100px;
+
+    background-color: var(--night-bordeaux);
+    border-radius: 10px;
+    opacity: 0.8;
+
+    align-items: center;
+    justify-content: center;
+}
+
+#header-bar p{
+    color: lavenderblush;
+    font-size: 11px;
+    font-family: 'Lemon Milk', sans-serif;
+    font-weight: normal;
+    font-style: italic;
+}
+
+/* main body */
+.main-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.main-wrapper .container{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#main{
+    flex-grow: 1;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Lemon Milk', sans-serif;
+    font-size: 75px;
+
+    
+}
+
+#main h1, p{
+    padding: 0;
+    margin: 0;
+}
+
+
+/* footer */
+
+.footer-wrapper {
+    background-color: transparent;
+    width: 100%;
+}
+
+#footer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+
+    font-size: 12px;
+    padding: 15px 0;
+    font-family: 'Lemon Milk', sans-serif;
+
+}
+
+.logo-grp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2 ease;
+
+}
+
+.logo-grp img{
+    width: 20px;    
+    height: auto;
+    transition: filter 0.3 ease;
+}
+
+.logo-grp a {
+    text-decoration: none;
+    color: var(--night-bordeaux);
+    font-weight: bold;
+    display: inline-block;
+    transition: color 0.3s ease, text-shadow 0.3 ease;
+}
+
+.logo-grp:hover a{
+    color: red;
+    text-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+    animation: cartoonPop 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.logo-grp:hover img{
+    filter: drop-shadow(0 0 5px red);
+    animation: cartoonPop 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.logo-grp::after{
+    content: "❤";  /* The heart symbol */
+    position: absolute;
+    top: -10px;    /* Start slightly above the text */
+    left: 50%;     /* Center it */
+    transform: translateX(-50%) scale(0); /* Hidden initially */
+    
+    font-size: 18px;
+    color: #ff4d6d; /* Bubblegum pink/red color */
+    opacity: 0;
+    pointer-events: none; /* Make sure you can't click the heart */
+}
+
+.logo-grp:hover::after{
+    animation: floatHeart 1s ease-out infinite;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateX(-50%) translateY(0) scale(0.5);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1; /* Appears quickly */
+    }
+    100% {
+        transform: translateX(-50%) translateY(-40px) scale(1.2); /* Floats UP high */
+        opacity: 0; /* Fades out */
+    }
+}
+
+/* --- THE CARTOON POP ANIMATION --- */
+@keyframes cartoonPop {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.15); } /* Grow too big (Overshoot) */
+    60% { transform: scale(0.95); } /* Shrink slightly (Bounce) */
+    80% { transform: scale(1.05); } /* Settle */
+    100% { transform: scale(1.05); } /* Stay slightly grown */
+}
+
+
+
+/* sidebar */
+#sidebar{
+    background-color: var(--dark-amaranth);
+    width: 250px;
+}
