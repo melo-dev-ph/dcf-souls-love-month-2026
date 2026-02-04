@@ -7,11 +7,20 @@
         <link rel="stylesheet" href="./css/style.css">
         <link rel="stylesheet" href="./css/style-overlay.css">
         <script src="./javascript/scroll.js"></script>
+        <script src="./javascript/glitter.js"></script>
     </head>
 
     <body>
+       
+
+        <div id="video-overlay"></div>
+        <div id="glitter-container"></div>
         <div id="page-wrapper"> 
+             <video autoplay muted loop playsinline id="bg-video">
+                <source src="./assets/videos/love-background-video-animation.mp4" type="video/mp4">
+            </video>
             <!-- Main Page-->
+
             <div class="header-wrapper">
                 <div class="container">
                     <div id="header">
@@ -22,7 +31,6 @@
                             <p>and Peace </p>
                         </div>
                         <p id="line">| </p>
-                        <h1> SOULKADA</h1>
                         <div id="header-bar">
                             <p> Part 1 - February 13, 2026 - 6PM | Part 2 - February 27, 2026 - 6PM</p>
                         </div>
@@ -33,8 +41,9 @@
             <div class="main-wrapper">
                 <div class="container">
                     <div id="main">
-                        <h1>TITLE</h1>
-                        <p>Tagline</p>
+                        <h1 id="h1-soulkada">SOULKADA</h1>
+                        <h1>HEART CHECK</h1>
+                        <p>Ready ka na ba?</p>
                     </div>
                 </div>
             </div>
