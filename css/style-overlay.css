@@ -19,23 +19,76 @@ body {
 
 
 #sidebar {
-    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
     height: 100vh;
+    width: 220px;
+
+    z-index: 1000;
+
+    transform: translate(calc(100% - 20px));
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
+#sidebar.active {
+    transform: translateX(0);
+}
+
 #sidebar-container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-
     align-items: center;
 
-    background-color: lavenderblush;
+    border: 4px solid var(--night-bordeaux);
+    border-radius: 25px 0 0 25px;
 
-    margin: 10px;
-    border-radius: 15px;
+    background-color: var(--lavender-blush);
+
+    outline: 2px dashed var(--rosewood);
+    outline-offset: -12px;
+
+    box-shadow: -10px 0 20px rgba(0, 0, 0, 0.2);
+
+    margin: 0px;
+    
 
     height: 100%;
     width: 100%;
+}
+
+#sidebar-toggle {
+   position: absolute;
+    top: 50%;
+    left: -40px; /* Stick it 40px to the left of the sidebar */
+    transform: translateY(-50%); /* Center it vertically */
+    
+    width: 40px;
+    height: 60px;
+    
+    background-color: var(--night-bordeaux);
+    border-radius: 10px 0 0 10px; /* Round the left corners */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    cursor: pointer;
+    box-shadow: -4px 4px 0 rgba(0,0,0,0.2);
+    
+    color: var(--lavender-blush);
+    font-size: 20px;
+    transition: background-color 0.2s;  
+}
+
+#sidebar-toggle:hover {
+    background-color: var(--rosewood);
+}
+
+#sidebar.active #sidebar span {
+    transform: rotate(180deg);
+    display: inline-block;
 }
 
 .btn {
@@ -49,14 +102,19 @@ body {
 
     border: 4px solid white;
 
-    width: 80%;
+    width: 120px;
     aspect-ratio: 1 / 1;
     
-    border-radius: 15px;
+    border-radius: 25px;
 
     box-shadow: 6px 6px 0px rgba(89, 13, 34, 0.15);
+
+    transition: transform 0.2 ease;
 }
 
+.btn:hover {
+    transform: scale(1.05);
+}
 /* Buttons */
 
 #btn-rant, #btn-gallery, #btn-timer {
