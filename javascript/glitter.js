@@ -1,47 +1,30 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById("glitter-container");
+const carpet = document.getElementById('magic-carpet');
+// NEW: Target the container instead of the body
+const container = document.getElementById('glitter-container'); 
+
+function createTrail() {
+    const rect = carpet.getBoundingClientRect();
     
-    // Configuration
-    const glitterFrequency = 150; // New star every 150ms (Lower = more glitter)
-    const colors = [
-        '#ffffff', // White
-        '#ffd700', // Gold
-        '#ffb3c1', // Cherry Blossom (From your theme)
-        '#ff4d6d'  // Bubblegum Pink (From your theme)
-    ];
-
-    function createGlitter() {
-        const sparkle = document.createElement("div");
-        sparkle.classList.add("glitter-star");
-
-        // 1. Random Position
-        // Math.random() gives 0 to 1. We multiply by 100 to get percentage.
-        sparkle.style.left = Math.random() * 100 + "%";
-        sparkle.style.top = Math.random() * 100 + "%";
-
-        // 2. Random Size (between 10px and 25px)
-        const size = Math.random() * 15 + 10;
-        sparkle.style.width = size + "px";
-        sparkle.style.height = size + "px";
-
-        // 3. Random Color
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        sparkle.style.backgroundColor = randomColor;
-
-        // 4. Random Animation Speed (between 1s and 2s)
-        // This makes them twinkle at different rates
-        const duration = Math.random() * 1 + 1;
-        sparkle.style.animationDuration = duration + "s";
-
-        // Add to HTML
-        container.appendChild(sparkle);
-
-        // Remove the element after animation finishes to keep browser clean
-        setTimeout(() => {
-            sparkle.remove();
-        }, duration * 1000);
+    // Check if visible
+    if(rect.width > 0 && rect.left < window.innerWidth && rect.right > 0) {
+        const star = document.createElement('div');
+        star.classList.add('trail-particle');
+        
+        // Randomize position
+        const randomX = (Math.random() - 0.5) * 20;
+        const randomY = (Math.random() - 0.5) * 10;
+        
+        star.style.left = (rect.left + rect.width/2 + randomX) + 'px';
+        star.style.top = (rect.top + rect.height/2 + randomY) + 'px';
+        
+        const size = Math.random() * 4 + 2; 
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        
+        // CHANGE: Append to container, NOT document.body
+        container.appendChild(star); 
+        
+        setTimeout(() => { star.remove(); }, 1000);
     }
-
-    // Start the glitter machine
-    setInterval(createGlitter, glitterFrequency);
-});
+}
+setInterval(createTrail, 50);
