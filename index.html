@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta id="viewport-meta" name="viewport" content="width=device-width, initial-scale=1.0">
         <title>DCFSouls - Love Month</title>
         <link rel="stylesheet" href="./css/style.css">
         <link rel="stylesheet" href="./css/style-overlay.css">
@@ -10,9 +10,21 @@
     </head>
 
     <body>
+        <div id="landscape-warning">
+            <div class="warning-content">
+                <h1>⟳</h1>
+                <p>Please rotate your phone</p>
+                <span>For the best Soulkada experience!</span>
+            </div>
+        </div>
 
+        <audio id="bg-music" loop>
+            <source src="./assets/music/bg-music.mp3" type="audio/mpeg">
+        </audio>
         <div id="video-overlay"></div>
         <div id="glitter-container"></div>
+
+        
 
         <div id="page-wrapper"> 
              <video autoplay muted loop playsinline id="bg-video">
@@ -25,9 +37,7 @@
                     <div id="header">
                         <img id="dcf-logo" src="./assets/img/dcf-logo-transparent.png">
                         <div id="header-logo-title">
-                            <p>Disciples Celebration </p>
-                            <p>Fellowship Church of Love </p>
-                            <p>and Peace </p>
+                            <p>Disciples Celebration Fellowship Church of Love and Peace  </p>
                         </div>
                         <p id="line">| </p>
                         <div id="header-bar">
@@ -135,38 +145,41 @@
         </div>
 
         <div id="timer-overlay">
-            <div class="timer-container">
-                <h2>See you Soulkada in..</h2>
+            <button id="close-timer">Close</button>
+            
+            <div class="timer-scroll-wrapper">
+                <div class="timer-container">
+                    <h2>Soulkada Countdown</h2>
 
-                <div id="countdown-display">
-                    <div class="time-box">
-                        <span id="days">00</span>
-                        <p>Days</p>
+                    <h3 class="timer-label">Part 1 - Feb 13</h3>
+                    <div class="countdown-display">
+                        <div class="time-box"><span id="days1">00</span><p>Days</p></div>
+                        <div class="time-box"><span id="hours1">00</span><p>Hours</p></div>
+                        <div class="time-box"><span id="mins1">00</span><p>Mins</p></div>
+                        <div class="time-box"><span id="secs1">00</span><p>Secs</p></div>
                     </div>
 
-                    <div class="time-box">
-                        <span id="hours">00</span>
-                        <p>Hours</p>
-                    </div>
-
-                    <div class="time-box">
-                        <span id="mins">00</span>
-                        <p>Mins</p>
-                    </div>
-
-                    <div class="time-box">
-                        <span id="secs">00</span>
-                        <p>Secs</p>
+                    <h3 class="timer-label">Part 2 - Feb 27</h3>
+                    <div class="countdown-display">
+                        <div class="time-box"><span id="days2">00</span><p>Days</p></div>
+                        <div class="time-box"><span id="hours2">00</span><p>Hours</p></div>
+                        <div class="time-box"><span id="mins2">00</span><p>Mins</p></div>
+                        <div class="time-box"><span id="secs2">00</span><p>Secs</p></div>
                     </div>
                 </div>
-            </div>
 
-            <div id="map">
-            <iframe src="https://maps.app.goo.gl/gPx1yxRBL7un9rDJ7" width="100%" 
-            height="200" style="border:0" allowfullscreen="" loading="lazy"> </iframe>
+                <div id="map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15437.515141652375!2d120.9767493!3d14.691158699999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b40861b1095f%3A0x2a13456c8edfecc!2sDISCIPLES%20CELEBRATION%20FELLOWSHIP%2C%20Karuhatan%2C%20Valenzuela%20City%20(DCFCLP)!5e0!3m2!1sen!2sph!4v1770445973312!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" 
+                        width="100%" 
+                        height="300" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
             </div>
-
-            <button id="close-timer">Close</button>
         </div>
 
         <div id="photo-modal">

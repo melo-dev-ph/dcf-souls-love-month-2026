@@ -122,10 +122,9 @@ body {
 
 #header-logo-title {
     display: flex;
-    flex-wrap: wrap;
-    max-width: 175px;
     font-size: 12px;
     line-height: 1;
+    font-family: 'Lemon Milk', sans-serif;
 }
 
 #line {
@@ -141,26 +140,30 @@ body {
 #header-bar{
     display: flex;
     flex-grow: 1;
+    height: 50px; 
 
-    height: 55px;
     margin-left: 20px;
     margin-right: 100px;
-    padding: 0 40px;
+    padding: 0 20px;
 
     background-color: var(--lavender-blush);
 
-    clip-path: polygon(
-        2% 0%, 8% 10%, 15% 0%, 23% 8%, 30% 0%, 38% 12%, 45% 0%, 53% 10%, 
-        60% 0%, 68% 10%, 75% 0%, 83% 12%, 90% 0%, 97% 10%, 100% 0%, 
-        100% 100%, 
-        98% 90%, 90% 100%, 83% 92%, 75% 100%, 68% 90%, 60% 100%, 53% 92%, 
-        45% 100%, 38% 90%, 30% 100%, 23% 92%, 15% 100%, 8% 90%, 2% 100%, 
-        0% 100%, 0% 0%
-    );
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+
+    border: 3px solid var(--night-bordeaux);
+
+    box-shadow: 6px 6px 0px var(--dark-amaranth);
+
+
+    clip-path: none; 
+    filter: none;
 
     align-items: center;
     justify-content: center;
+    
+    transition: transform 0.2s ease;
 }
+
 
 #header-bar{
     filter: drop-shadow(4px 4px 0px var(--dark-amaranth));
@@ -169,12 +172,12 @@ body {
 
 #header-bar p{
     color: var(--night-bordeaux);
-    font-size: 13px;
+    font-size: 14px;
     font-family: 'Lemon Milk', sans-serif;
     font-weight: bold;
-    font-style: italic;
     letter-spacing: 1px;
     text-shadow: none;
+    margin: 0;
 }
 
 /* main body */
@@ -404,7 +407,10 @@ body {
 .glitter-star{
     position: absolute;
     clip-path: polygon(50% 0%, 65% 40%, 100% 50%, 65% 60%, 50% 100%, 35% 60%, 0% 50%, 35% 40%);
-    animation: twinkle linear forwards;
+    
+    animation-name: twinkle;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
 }
 
 @keyframes twinkle{
@@ -439,3 +445,68 @@ body {
     0% { transform: scale(1); opacity: 1; }
     100% { transform: translate(0, 20px) scale(0); opacity: 0; }
 }
+
+/* --- LANDSCAPE ENFORCER --- */
+
+/* 1. Default State: Hidden (For Desktop & Landscape) */
+#landscape-warning {
+    display: none;
+}
+
+/* 2. The Trigger: Only show on Portrait Mobile/Tablets */
+@media only screen and (orientation: portrait) and (max-width: 1024px) {
+    
+    #landscape-warning {
+        display: flex; /* Turn it on */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        
+        background-color: var(--night-bordeaux);
+        z-index: 9999; /* Sit on top of EVERYTHING */
+        text-align: center;
+    }
+
+    /* Hide the actual website content so they can't scroll */
+    #page-wrapper, #sidebar, #video-overlay, #glitter-container {
+        display: none !important;
+    }
+
+    /* Style the Warning Text */
+    .warning-content h1 {
+        font-size: 80px;
+        color: var(--bubblegum-pink);
+        margin: 0 0 20px 0;
+        animation: rotateIcon 2s infinite ease-in-out;
+    }
+
+    .warning-content p {
+        font-family: 'Lemon Milk', sans-serif;
+        font-size: 24px;
+        color: var(--lavender-blush);
+        margin: 0 0 10px 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .warning-content span {
+        font-family: 'Puimek', cursive;
+        font-size: 18px;
+        color: var(--cotton-candy);
+    }
+}
+
+/* Animation for the rotate icon */
+@keyframes rotateIcon {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-90deg); }
+    50% { transform: rotate(-90deg); } /* Pause */
+    100% { transform: rotate(0deg); }
+}
+

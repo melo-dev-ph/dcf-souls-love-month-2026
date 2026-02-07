@@ -180,14 +180,14 @@ document.addEventListener('DOMContentLoaded', () => {
         { text: "If either of them falls down, one can help the other up.", ref: "Ecclesiastes 4:10" },
         { text: "As iron sharpens iron, so one person sharpens another.", ref: "Proverbs 27:17" },
         { text: "Therefore encourage one another and build each other up.", ref: "1 Thessalonians 5:11" },
-        { text: "How good and pleasant it is when God’s people live together in unity!", ref: "Psalm 133:1" },
+        { text: "How good and pleasant it is when God's people live together in unity!", ref: "Psalm 133:1" },
         { text: "By this everyone will know that you are my disciples, if you love one another.", ref: "John 13:35" },
         { text: "And over all these virtues put on love, which binds them all together in perfect unity.", ref: "Colossians 3:14" },
         { text: "Be devoted to one another in love. Honor one another above yourselves.", ref: "Romans 12:10" },
         { text: "A friend loves at all times, and a brother is born for a time of adversity.", ref: "Proverbs 17:17" },
         { text: "Let us not give up meeting together... but let us encourage one another.", ref: "Hebrews 10:25" },
         { text: "Above all, love each other deeply, because love covers over a multitude of sins.", ref: "1 Peter 4:8" },
-        { text: "Carry each other’s burdens, and in this way you will fulfill the law of Christ.", ref: "Galatians 6:2" },
+        { text: "Carry each other's burdens, and in this way you will fulfill the law of Christ.", ref: "Galatians 6:2" },
         { text: "But if we walk in the light, as he is in the light, we have fellowship with one another.", ref: "1 John 1:7" },
         { text: "I thank my God every time I remember you.", ref: "Philippians 1:3" },
         { text: "Greater love has no one than this: to lay down one’s life for one’s friends.", ref: "John 15:13" }
@@ -271,5 +271,123 @@ document.addEventListener('DOMContentLoaded', () => {
             museumOverlay.scrollLeft += evt.deltaY;
         });
     }
+
+    /* =========================================
+       4. TIMER & LOCATION LOGIC (Two Timers)
+       ========================================= */
+    const timerBtn = document.getElementById('btn-timer');
+    const timerOverlay = document.getElementById('timer-overlay');
+    const closeTimerBtn = document.getElementById('close-timer');
+
+    // 1. Set the Target Dates (Added GMT+0800 for Philippines Standard Time)
+    const date1 = new Date("February 13, 2026 18:00:00 GMT+0800").getTime();
+    const date2 = new Date("February 27, 2026 18:00:00 GMT+0800").getTime();
+
+    // Helper function to update a specific set of IDs
+    function calculateTime(targetDate, idSuffix) {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+            document.getElementById("days" + idSuffix).innerText = "00";
+            document.getElementById("hours" + idSuffix).innerText = "00";
+            document.getElementById("mins" + idSuffix).innerText = "00";
+            document.getElementById("secs" + idSuffix).innerText = "00";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days" + idSuffix).innerText = days < 10 ? "0" + days : days;
+        document.getElementById("hours" + idSuffix).innerText = hours < 10 ? "0" + hours : hours;
+        document.getElementById("mins" + idSuffix).innerText = minutes < 10 ? "0" + minutes : minutes;
+        document.getElementById("secs" + idSuffix).innerText = seconds < 10 ? "0" + seconds : seconds;
+    }
+
+    function startTimers() {
+        calculateTime(date1, "1"); // Update IDs: days1, hours1...
+        calculateTime(date2, "2"); // Update IDs: days2, hours2...
+    }
+
+    if (timerBtn && timerOverlay) {
+        let timerInterval; // Store interval ID
+
+        timerBtn.addEventListener('click', () => {
+            timerOverlay.classList.add('active');
+            if (typeof sidebar !== 'undefined') sidebar.classList.remove('active');
+            
+            // Run immediately then every second
+            startTimers();
+            timerInterval = setInterval(startTimers, 1000);
+        });
+
+        // Close functions
+        const closeTimer = () => {
+            timerOverlay.classList.remove('active');
+            if (timerInterval) clearInterval(timerInterval); // Stop math when closed
+        };
+
+        if (closeTimerBtn) closeTimerBtn.addEventListener('click', closeTimer);
+        
+        timerOverlay.addEventListener('click', (e) => {
+            if (e.target === timerOverlay || e.target.classList.contains('timer-scroll-wrapper')) {
+                closeTimer();
+            }
+        });
+    }
+
+    /* =========================================
+       5. INVISIBLE BACKGROUND MUSIC
+       ========================================= */
+    const bgMusic = document.getElementById('bg-music');
+
+    if (bgMusic) {
+        bgMusic.volume = 0.4; // Set volume (0.1 to 1.0)
+
+        // Try to play immediately (might fail due to browser rules)
+        bgMusic.play().catch(() => {
+            // If blocked, wait for the FIRST interaction anywhere on the page
+            document.addEventListener('click', () => {
+                bgMusic.play();
+            }, { once: true }); // 'once: true' means it runs only one time
+        });
+    }
+
+    /* =========================================
+   6. SMART VIEWPORT SCALER (The "Shrink to Fit" Fix)
+   ========================================= */
+    function updateViewport() {
+        const viewport = document.getElementById('viewport-meta');
+        const screenWidth = window.screen.width;
+        const screenHeight = window.screen.height;
+        
+        // Check if we are in Landscape Mode
+        // (We check if width > height, standard for landscape)
+        const isLandscape = screenWidth > screenHeight;
+
+        if (isLandscape && screenWidth < 1024) {
+            // WE ARE ON A PHONE IN LANDSCAPE!
+            // Force the browser to think it is 1200px wide.
+            // This makes the site zoom out to fit your original design.
+            viewport.setAttribute('content', 'width=1450, user-scalable=no');
+        } else {
+            // WE ARE IN PORTRAIT OR ON DESKTOP
+            // Use standard mobile sizing (so the "Rotate" warning looks normal)
+            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+        }
+    }
+
+    // Run on load
+    window.addEventListener('load', updateViewport);
+
+    // Run whenever the user rotates their phone
+    window.addEventListener('orientationchange', () => {
+        // Small delay to let the screen finish rotating
+        setTimeout(updateViewport, 100);
+    });
+    window.addEventListener('resize', updateViewport);
 
 }); // END OF DOM CONTENT LOADED

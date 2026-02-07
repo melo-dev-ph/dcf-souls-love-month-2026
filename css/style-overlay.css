@@ -326,6 +326,21 @@ body {
     opacity: 1;
 }
 
+#notebook-overlay.active .notebook-cover {
+    animation: notebookEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes notebookEntrance {
+    0% { 
+        opacity: 0;
+        transform: translateY(100px) scale(0.8) rotate(-10deg); /* Start low, small, and tilted */
+    }
+    100% { 
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(-2deg); /* Land in final position */
+    }
+}
+
 .notebook-cover {
     position: relative;
     width: 90%;
@@ -905,4 +920,153 @@ body {
 @keyframes heartbeat {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
+}
+
+/* --- TIMER & LOCATION OVERLAY --- */
+
+#timer-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(89, 13, 34, 0.95);
+    backdrop-filter: blur(5px);
+    z-index: 3000;
+    
+    /* Allow scrolling for tall content */
+    overflow-y: auto; 
+    padding-top: 60px; /* Space for close button */
+    padding-bottom: 40px;
+}
+
+#timer-overlay.active {
+    display: block; /* Changed from flex to block to allow scrolling */
+    animation: fadeIn 0.5s ease;
+}
+
+/* Wrapper to center everything nicely */
+.timer-scroll-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    min-height: 100%;
+}
+
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.timer-container h2 {
+    font-family: 'Lemon Milk', sans-serif;
+    color: var(--lavender-blush);
+    font-size: 32px;
+    text-align: center;
+    text-shadow: 2px 2px 0 var(--rosewood);
+    margin-bottom: 10px;
+}
+
+.timer-label {
+    font-family: 'Lemon Milk', sans-serif;
+    color: var(--bubblegum-pink);
+    font-size: 20px;
+    margin-top: 15px;
+    text-shadow: 1px 1px 0 var(--night-bordeaux);
+}
+
+/* The Grid of Time Boxes */
+.countdown-display {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.time-box {
+    background-color: var(--lavender-blush);
+    width: 70px; /* Slightly smaller to fit two rows nicely */
+    padding: 10px 5px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    border: 3px solid var(--bubblegum-pink);
+    box-shadow: 4px 4px 0 var(--night-bordeaux);
+    transform: rotate(-2deg);
+}
+
+.time-box:nth-child(even) {
+    transform: rotate(2deg);
+    margin-top: 5px;
+}
+
+.time-box span {
+    font-family: 'Lemon Milk', sans-serif;
+    font-size: 24px;
+    color: var(--night-bordeaux);
+    font-weight: bold;
+}
+
+.time-box p {
+    font-family: 'Puimek', cursive;
+    color: var(--rosewood);
+    font-size: 12px;
+    margin: 0;
+}
+
+/* --- THE MAP --- */
+#map {
+    display: block;
+    width: 90%;
+    max-width: 600px;
+    
+    
+    flex-shrink: 0;  
+    height: 300px;   
+
+
+    border: 5px solid var(--lavender-blush);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    background-color: white;
+    
+    
+    margin-bottom: 100px; 
+}
+
+#map iframe {
+    display: block;
+    width: 100%;
+    height: 100%; 
+    border: 0;
+}
+
+
+#close-timer {
+    position: fixed; 
+    top: 20px;
+    right: 20px;
+    background-color: var(--rosewood);
+    color: white;
+    font-family: 'Lemon Milk', sans-serif;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+    z-index: 3005;
+}
+
+#close-timer:hover {
+    transform: scale(1.1);
+    background-color: var(--bubblegum-pink);
 }
