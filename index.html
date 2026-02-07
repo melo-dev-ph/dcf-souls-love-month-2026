@@ -6,13 +6,10 @@
         <title>DCFSouls - Love Month</title>
         <link rel="stylesheet" href="./css/style.css">
         <link rel="stylesheet" href="./css/style-overlay.css">
-        <script src="./javascript/sidebar.js"></script>
-        <script src="./javascript/glitter.js"></script>
-        <script src="./javascript/glitter-trail.js"></script>
+        
     </head>
 
     <body>
-       
 
         <div id="video-overlay"></div>
         <div id="glitter-container"></div>
@@ -93,21 +90,51 @@
             </div>
         </div>
 
-        <div id="notebook-overlay" class="hidden">
-            <div class="notebook-content">
-                <textarea id="user-rant" placeholder="Let it all out.. feel free to type your rants here anonymously"></textarea>
-                <button id="submit-rant">Release</button>
-                <div id="verse-card" class="hidden">
-                    <!--Nothing for now-->
+        <div id="notebook-overlay">
+            <div class="notebook-cover">
+                <div class="notebook-spiral"></div>
+                
+                <div class="notebook-paper">
+                    <h2 class="notebook-title">How's your heart today—light, heavy, or somewhere in between?</h2>
+                    <textarea id="user-rant" placeholder=". . . ."></textarea>
+                    
+                    <div class="notebook-footer">
+                        <button id="submit-rant">Release</button>
+                    </div>
+
+                    <div id="verse-card" class="hidden"></div>
                 </div>
             </div>
         </div>
 
-        <div id="museum-overlay" class="hidden">
-            <!-- Nothing for now-->
+        <div id="museum-overlay">
+            <button id="close-museum">✕</button>
+
+    <div class="museum-track">
+        <div class="museum-intro">
+            <h2>DCF<br>Soulskada<br>Walkthrough</h2>
         </div>
 
-        <div id="timer-overlay" class="hidden">
+        <div class="img-container"><img src="./assets/img/clip-1.jpg"></div>
+        <div class="img-container"><img src="./assets/img/clip-2.jpg"></div>
+        <div class="img-container"><img src="./assets/img/clip-3.jpg"></div>
+        <div class="img-container"><img src="./assets/img/clip-4.jpg"></div>
+        <div class="img-container"><img src="./assets/img/clip-5.jpg"></div>
+        <div class="img-container"><img src="./assets/img/clip-6.jpg"></div>
+        <div class="img-container"><img src="./assets/img/clip-7.jpg"></div>
+        <div class="img-container"><img src="./assets/img/clip-8.jpg"></div>
+        <div class="img-container"><img src="./assets/img/clip-9.jpg"></div>
+        <div class="img-container"><img src="./assets/img/clip-10.jpg"></div>
+        <div class="img-container"><img src="./assets/img/clip-11.jpg"></div>
+        <div class="img-container"><img src="./assets/img/clip-12.jpg"></div>
+        
+        <div class="museum-outro">
+            <p>Nandito ka na next... See you!!!</p>
+        </div>
+    </div>
+        </div>
+
+        <div id="timer-overlay">
             <div class="timer-container">
                 <h2>See you Soulkada in..</h2>
 
@@ -142,7 +169,17 @@
             <button id="close-timer">Close</button>
         </div>
 
-        
+        <div id="photo-modal">
+            <div class="modal-content">
+                <span class="modal-tape"></span>
+                <img id="modal-img" src="" alt="Memory">
+                <div class="modal-caption">Memory Unlocked! ✨</div>
+            </div>
+        </div>
         
     </body>
+
+    <script src="./javascript/sidebar.js" defer></script>
+    <script src="./javascript/glitter.js" defer></script>
+    <script src="./javascript/glitter-trail.js" defer></script>
 </html>
